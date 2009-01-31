@@ -248,7 +248,7 @@ module DataMapper
 
       ##
       # Prepares a REST request to a temporary view. Though convenient for
-      # development, "slow" views should generally be avoided.
+      # development, "temp" views should generally be avoided.
       #
       # @param query<DataMapper::Query> the query
       # @return request<Net::HTTPRequest> a request object
@@ -264,7 +264,7 @@ module DataMapper
           key = "[#{key}]"
         end
 
-        request = Net::HTTP::Post.new("/#{self.escaped_db_name}/_slow_view#{query_string(query)}")
+        request = Net::HTTP::Post.new("/#{self.escaped_db_name}/_temp_view#{query_string(query)}")
         request["Content-Type"] = "application/json"
 
         couchdb_type_condition = ["doc.couchdb_type == '#{query.model.to_s}'"]
